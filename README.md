@@ -131,33 +131,31 @@ flowchart TD
     CoreStudies --> HandsOnLabs[Complete Hands-on Labs: Build Custom MCP Server & Tool Loop]
     HandsOnLabs --> PracticeQuestions[Take Domain Practice Questions]
     PracticeQuestions --> FullMock[Take Full-Length Timed Mock on ExamsDay]
-    FullMock --> CheckScore{Score >= 75%?}
+    FullMock --> CheckScore{"Score >= 75%?"}
     CheckScore -- No --> GapAnalysis[Analyze Weak Domains & Review Error Logs]
     GapAnalysis --> RefactorCode[Refactor Lab Code & Re-read Anthropic Docs]
     RefactorCode --> PracticeQuestions
     CheckScore -- Yes --> FinalReview[Final Review of Rate Limits, Caching & Pricing]
     FinalReview --> SitExam([Sit for CCDV-F Exam at Pearson VUE])
-```
-
----
 
 ## 7. Technical Architecture & Integration Diagram
 
+```markdown
 ```mermaid
 flowchart LR
-    subgraph ClientEnvironment ["Client Application Runtime"]
+    subgraph ClientEnvironment [Client Application Runtime]
         UserApp["Application Code (Python / TS)"]
         ClaudeCLI["Claude Code CLI Engine"]
         MCPClientInstance["MCP Client / Host"]
     end
 
-    subgraph AnthropicPlatform ["Anthropic Cloud Platform"]
+    subgraph AnthropicPlatform [Anthropic Cloud Platform]
         APIGateway["Anthropic Messages API (/v1/messages)"]
         ContextCache[("Ephemeral Prompt Cache")]
         ClaudeEngine["Claude 3.5 Sonnet / Haiku Model"]
     end
 
-    subgraph EnterpriseBackends ["Model Context Protocol (MCP) Network"]
+    subgraph EnterpriseBackends [Model Context Protocol MCP Network]
         MCPServerSQL[("Database MCP Server (PostgreSQL)")]
         MCPServerFiles[("Local FileSystem MCP Server")]
         MCPServerExternal["Enterprise REST API MCP Server"]
@@ -179,27 +177,29 @@ flowchart LR
 
     MCPClientInstance -->|"5. Return tool_result"| UserApp
     UserApp -->|"6. Send Messages payload with tool_result"| APIGateway
-```
-
----
 
 ## 8. Circular Study and Revision Cycle
 
 Preparation for technical AI engineering is an iterative development loop:
 
-```mermaid
-stateDiagram-v2
-    [*] --> StudyConcepts
-    StudyConcepts --> HandsOnCode : Implement Messages API & Tool Schemas
-    HandsOnCode --> PracticeTests : Run ExamsDay Mock Test Simulator
-    PracticeTests --> ErrorAnalysis : Trace Failed Decisions & Cache Misses
-    ErrorAnalysis --> TargetRevision : Review Official Anthropic Documentation
-    TargetRevision --> HandsOnCode : Debug & Refactor Implementations
-    PracticeTests --> ReadyForExam : Consistent >=80% Across All Domains
-    ReadyForExam --> [*]
-```
-
 ---
+
+#### Fix for Section 8: Circular Study and Revision Cycle
+
+*(Switching to a clean `flowchart TD` loop is significantly more stable and consistent across GitHub dark and light themes than `stateDiagram-v2`)*:
+
+```markdown
+```mermaid
+flowchart TD
+    A([Start Cycle]) --> B[Study Concepts: Messages API & Tool Schemas]
+    B --> C[Hands-On Coding: Implement Schemas & Execution Loops]
+    C --> D[Practice Tests: Run ExamsDay Mock Test Simulator]
+    D --> E[Error Analysis: Trace Failed Decisions & Cache Misses]
+    E --> F[Targeted Revision: Review Official Anthropic Documentation]
+    F --> G[Hands-On Refactor: Debug & Refactor Implementations]
+    G --> H{Scoring >= 80% Consistently?}
+    H -- No --> C
+    H -- Yes --> I([Ready for Exam])
 
 ## 9. Step-by-Step Preparation Roadmap
 
