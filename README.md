@@ -121,87 +121,9 @@ pie title CCDV-F Official Exam Domain Weighting
 
 ---
 
-## 6. Certification Preparation Flowchart
 
-```mermaid
-flowchart TD
-    Start([Start CCDV-F Preparation]) --> ReadBlueprint[Review Official Exam Objectives]
-    ReadBlueprint --> SetupSDK[Set Up Anthropic Python / TypeScript SDK]
-    SetupSDK --> CoreStudies[Study Messages API, Tool Calling & Prompt Caching]
-    CoreStudies --> HandsOnLabs[Complete Hands-on Labs: Build Custom MCP Server & Tool Loop]
-    HandsOnLabs --> PracticeQuestions[Take Domain Practice Questions]
-    PracticeQuestions --> FullMock[Take Full-Length Timed Mock on ExamsDay]
-    FullMock --> CheckScore{"Score >= 75%?"}
-    CheckScore -- No --> GapAnalysis[Analyze Weak Domains & Review Error Logs]
-    GapAnalysis --> RefactorCode[Refactor Lab Code & Re-read Anthropic Docs]
-    RefactorCode --> PracticeQuestions
-    CheckScore -- Yes --> FinalReview[Final Review of Rate Limits, Caching & Pricing]
-    FinalReview --> SitExam([Sit for CCDV-F Exam at Pearson VUE])
 
-## 7. Technical Architecture & Integration Diagram
-
-```markdown
-```mermaid
-flowchart LR
-    subgraph ClientEnvironment [Client Application Runtime]
-        UserApp["Application Code (Python / TS)"]
-        ClaudeCLI["Claude Code CLI Engine"]
-        MCPClientInstance["MCP Client / Host"]
-    end
-
-    subgraph AnthropicPlatform [Anthropic Cloud Platform]
-        APIGateway["Anthropic Messages API (/v1/messages)"]
-        ContextCache[("Ephemeral Prompt Cache")]
-        ClaudeEngine["Claude 3.5 Sonnet / Haiku Model"]
-    end
-
-    subgraph EnterpriseBackends [Model Context Protocol MCP Network]
-        MCPServerSQL[("Database MCP Server (PostgreSQL)")]
-        MCPServerFiles[("Local FileSystem MCP Server")]
-        MCPServerExternal["Enterprise REST API MCP Server"]
-    end
-
-    UserApp -->|"1. API Request + System Instructions"| APIGateway
-    ClaudeCLI -->|"Project Rules (CLAUDE.md)"| APIGateway
-
-    APIGateway <-->|"Prefix Lookup / Store"| ContextCache
-    APIGateway -->|"Execute Inference"| ClaudeEngine
-
-    ClaudeEngine -->|"2. Return stop_reason: tool_use"| APIGateway
-    APIGateway -->|"3. Forward Tool Call Payload"| UserApp
-
-    UserApp -->|"4. Dispatch to MCP Client"| MCPClientInstance
-    MCPClientInstance <-->|"stdio / SSE Transport"| MCPServerSQL
-    MCPClientInstance <-->|"stdio / SSE Transport"| MCPServerFiles
-    MCPClientInstance <-->|"stdio / SSE Transport"| MCPServerExternal
-
-    MCPClientInstance -->|"5. Return tool_result"| UserApp
-    UserApp -->|"6. Send Messages payload with tool_result"| APIGateway
-
-## 8. Circular Study and Revision Cycle
-
-Preparation for technical AI engineering is an iterative development loop:
-
----
-
-#### Fix for Section 8: Circular Study and Revision Cycle
-
-*(Switching to a clean `flowchart TD` loop is significantly more stable and consistent across GitHub dark and light themes than `stateDiagram-v2`)*:
-
-```markdown
-```mermaid
-flowchart TD
-    A([Start Cycle]) --> B[Study Concepts: Messages API & Tool Schemas]
-    B --> C[Hands-On Coding: Implement Schemas & Execution Loops]
-    C --> D[Practice Tests: Run ExamsDay Mock Test Simulator]
-    D --> E[Error Analysis: Trace Failed Decisions & Cache Misses]
-    E --> F[Targeted Revision: Review Official Anthropic Documentation]
-    F --> G[Hands-On Refactor: Debug & Refactor Implementations]
-    G --> H{Scoring >= 80% Consistently?}
-    H -- No --> C
-    H -- Yes --> I([Ready for Exam])
-
-## 9. Step-by-Step Preparation Roadmap
+## 6. Step-by-Step Preparation Roadmap
 
 ```mermaid
 gantt
@@ -247,7 +169,7 @@ gantt
 
 ---
 
-## 10. Practice Questions & Mock Testing Strategy
+## 7. Practice Questions & Mock Testing Strategy
 
 To prepare effectively:
 * Practice identifying the root architectural requirement before reading the answer choices.
@@ -304,7 +226,7 @@ For more scenario-based mock exams, visit the [ExamsDay CCDV-F Module](https://e
 
 ---
 
-## 11. Common Preparation Mistakes
+## 8. Common Preparation Mistakes
 
 * **Assuming Server-Side Execution for Tools:** Claude never executes functions on Anthropic servers. Claude only returns JSON parameters; execution takes place inside your client environment or MCP Server.
 * **Invalidating Prompt Caching Prefixes:** Modifying system prompts, tools, or message history prior to a cached breakpoint triggers a cache miss, leading to higher latency and unexpected token costs.
@@ -314,7 +236,7 @@ For more scenario-based mock exams, visit the [ExamsDay CCDV-F Module](https://e
 
 ---
 
-## 12. Certification Benefits & Career Relevance
+## 9. Certification Benefits & Career Relevance
 
 * **Verified Production Expertise:** Demonstrates proficiency in production LLM development beyond simple prompt generation.
 * **Enterprise Architectural Readiness:** Confirms your ability to build production systems that balance token economics, latency, and context caching.
@@ -323,7 +245,7 @@ For more scenario-based mock exams, visit the [ExamsDay CCDV-F Module](https://e
 
 ---
 
-## 13. Frequently Asked Questions
+## 10. Frequently Asked Questions
 
 ### What happens if I fail the CCDV-F exam?
 Anthropic's retake policy typically requires a 14-day waiting period before a second attempt. Use your score report to target weak domains with hands-on practice before scheduling a retake.
@@ -336,7 +258,7 @@ Prompt Caching offers up to a 90% discount on cached input tokens and reduces Ti
 
 ---
 
-## 14. Official & Additional Learning Resources
+## 11. Official & Additional Learning Resources
 
 ### Official Documentation
 * [Anthropic Messages API Reference](https://docs.anthropic.com/en/api/getting-started)
@@ -351,7 +273,7 @@ Prompt Caching offers up to a 90% discount on cached input tokens and reduces Ti
 
 ---
 
-## 15. About ExamsDay
+## 12. About ExamsDay
 
 [ExamsDay](https://examsday.com/) is an official platform providing IT certification preparation materials, mock exams, and structured technical study resources.
 
